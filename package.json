@@ -1,0 +1,17 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "nodemon",
+    "debug": "nodemon --inspect"
+  },
+  "main": "src/server.js",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sucrase": "^3.29.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
