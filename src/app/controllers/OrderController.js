@@ -10,6 +10,7 @@ import User from "../models/User";
 import * as Yup from "yup";
 import Product from "../models/Product";
 import Category from "../models/Categories";
+import Order from "../schemas/Order";
 
 class OrderController {
   async store(req, res) {
@@ -58,7 +59,7 @@ class OrderController {
         price: product.price,
         category: product.category.name,
         url: product.url,
-        quantity: req.body.product[productIndex].quantity,
+        quantity: req.body.products[productIndex].quantity,
       };
 
       return newProduct;
@@ -69,9 +70,13 @@ class OrderController {
         id: req.userId,
         name: req.userName,
       },
+      products: editedProducts,
+      status: "Pedido realizado",
     };
 
-    return res.status(201).json(editedProducts);
+    const orderResponse = await Order.create(order);
+
+    return res.status(201).json(orderResponse);
   }
 }
 
