@@ -18,10 +18,11 @@ class CategoryController {
     const { admin: isAdmin } = await User.findByPk(req.userId);
 
     if (!isAdmin) {
+      return res.status(401).json();
     }
-    console.log(isAdmin);
 
     const { name } = req.body;
+    const { filename: path } = req.file;
     const categoryExists = await Category.findOne({
       where: {
         name,
@@ -31,11 +32,12 @@ class CategoryController {
     if (categoryExists) {
       return res.status(400).json({ error: "Category already exists" });
     }
-    const category = await Category.create({
+    const { id } = await Category.create({
       name,
+      path,
     });
 
-    return res.json(category);
+    return res.json({ name, id });
   }
 
   async index(req, res) {

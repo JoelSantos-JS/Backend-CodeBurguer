@@ -96,6 +96,12 @@ class OrderController {
         .json({ error: "Tenha certerza que os seu dados estao corretos " });
     }
 
+    const { admin: isAdmin } = await User.findByPk(req.userId);
+
+    if (!isAdmin) {
+      return res.status(401).json();
+    }
+
     const { id } = req.params;
     const { status } = req.body;
     try {

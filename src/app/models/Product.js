@@ -8,6 +8,7 @@ class Product extends Model {
         price: Sequelize.INTEGER,
 
         path: Sequelize.STRING,
+        offer: Sequelize.BOOLEAN,
         url: {
           type: Sequelize.VIRTUAL,
           get() {
